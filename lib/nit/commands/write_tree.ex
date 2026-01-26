@@ -1,5 +1,6 @@
 defmodule Nit.Commands.WriteTree do
   alias Nit.Commands.HashObject
+  alias Nit.Utils.ObjectStore
 
   def run() do
     {root_sha_hex, _binary} = build_tree(".")
@@ -56,9 +57,7 @@ defmodule Nit.Commands.WriteTree do
 
     compressed = :zlib.compress(store)
 
-    {dir, file} = String.split_at(sha_hex, 2)
-    File.mkdir_p!(".nit/objects/#{dir}")
-    File.write!(".nit/objects/#{dir}/#{file}", compressed)
+    ObjectStore.save_object_on_disk(sha_hex, compressed)
 
     {sha_hex, sha_binary}
   end
