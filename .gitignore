@@ -22,3 +22,8 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 nit-*.tar
 
+# Generated Binary
+/nit
+
+# Nit folder
+.nit/
