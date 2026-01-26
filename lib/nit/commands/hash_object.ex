@@ -2,18 +2,26 @@ defmodule Nit.Commands.HashObject do
   def run(file_path) do
     content = File.read!(file_path)
 
-    blob_data = "blob #{byte_size(content)}\0#{content}"
+    {sha_hex, _} = write_blob(content)
 
-    hash = :crypto.hash(:sha, blob_data) |> Base.encode16(case: :lower)
+    IO.puts(sha_hex)
+  end
+
+  def write_blob(content) do
+    header = "blob #{byte_size(content)}\0"
+    blob_data = header <> content
+
+    sha_binary = :crypto.hash(:sha, blob_data)
+    sha_hex = Base.encode16(sha_binary, case: :lower)
 
     compressed_data = :zlib.compress(blob_data)
 
-    write_object(hash, compressed_data)
+    save_object_on_disk(sha_hex, compressed_data)
 
-    IO.puts(hash)
+    {sha_hex, sha_binary}
   end
 
-  defp write_object(hash, data) do
+  defp save_object_on_disk(hash, data) do
     {dir_name, file_name} = String.split_at(hash, 2)
 
     dir_path = ".nit/objects/#{dir_name}"
