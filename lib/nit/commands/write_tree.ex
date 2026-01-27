@@ -1,5 +1,4 @@
 defmodule Nit.Commands.WriteTree do
-  alias Nit.Commands.HashObject
   alias Nit.Core.ObjectStore
 
   def run() do
@@ -19,7 +18,7 @@ defmodule Nit.Commands.WriteTree do
           {:dir, entry_name, sha_bin}
         else
           content = File.read!(full_path)
-          {_sha_hex, sha_bin} = HashObject.write_blob(content)
+          {_sha_hex, sha_bin} = ObjectStore.put_object("blob", content)
           {:file, entry_name, sha_bin}
         end
       end)
