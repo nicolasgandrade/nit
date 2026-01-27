@@ -11,9 +11,13 @@ defmodule Nit.Core.Refs do
   end
 
   def get_current_head_sha() do
-    get_head_branch_path()
-    |> File.read!()
-    |> String.trim()
+    path = get_head_branch_path()
+
+    case File.read(path) do
+      {:ok, sha} -> String.trim(sha)
+      {:error, :enoent} -> nil
+      {:error, reason} -> raise File.Error, reason: reason, action: "read", path: path
+    end
   end
 
   def get_head_branch_path() do
