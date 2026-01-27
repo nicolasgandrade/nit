@@ -25,22 +25,8 @@ defmodule Nit.Commands.CommitTree do
       |> Enum.join("\n")
       |> Kernel.<>("\n")
 
-    commit_sha = write_commit_object(content)
+    {commit_sha, _} = ObjectStore.put_object("commit", content)
 
     IO.puts(commit_sha)
-  end
-
-  defp write_commit_object(content) do
-    header = "commit #{byte_size(content)}\0"
-    store = header <> content
-
-    sha_binary = :crypto.hash(:sha, store)
-    sha_hex = Base.encode16(sha_binary, case: :lower)
-
-    compressed = :zlib.compress(store)
-
-    ObjectStore.save_object_on_disk(sha_hex, compressed)
-
-    sha_hex
   end
 end
