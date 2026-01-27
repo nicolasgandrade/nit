@@ -32,7 +32,7 @@ defmodule Nit.Commands.WriteTree do
         acc <> "#{mode} #{name}\0" <> sha_bin
       end)
 
-    write_tree_object(tree_body)
+    ObjectStore.put_object("tree", tree_body)
   end
 
   defp list_directory(dir) do
@@ -45,20 +45,5 @@ defmodule Nit.Commands.WriteTree do
       name != ".nit" and
         not String.starts_with?(name, ".")
     end)
-  end
-
-  defp write_tree_object(tree_body) do
-    # TODO: Transform this into a util function
-    header = "tree #{byte_size(tree_body)}\0"
-    store = header <> tree_body
-
-    sha_binary = :crypto.hash(:sha, store)
-    sha_hex = Base.encode16(sha_binary, case: :lower)
-
-    compressed = :zlib.compress(store)
-
-    ObjectStore.save_object_on_disk(sha_hex, compressed)
-
-    {sha_hex, sha_binary}
   end
 end
