@@ -25,6 +25,9 @@ defmodule Nit.CLI do
       ["log"] ->
         Nit.Commands.Log.run()
 
+      ["commit", "-m", message] ->
+        Nit.Commands.Commit.run(message)
+
       _ ->
         IO.puts("Nit: Unknown command.")
     end

@@ -2,6 +2,11 @@ defmodule Nit.Commands.CommitTree do
   alias Nit.Core.ObjectStore
 
   def run(tree_sha, message, parent_sha \\ nil) do
+    {commit_sha, _} = create_commit(tree_sha, message, parent_sha)
+    IO.puts(commit_sha)
+  end
+
+  def create_commit(tree_sha, message, parent_sha \\ nil) do
     # TODO: Make this receive actual data from the user.
     author_name = "Nit User"
     author_email = "user@nit.com"
@@ -25,8 +30,6 @@ defmodule Nit.Commands.CommitTree do
       |> Enum.join("\n")
       |> Kernel.<>("\n")
 
-    {commit_sha, _} = ObjectStore.put_object("commit", content)
-
-    IO.puts(commit_sha)
+    ObjectStore.put_object("commit", content)
   end
 end
