@@ -3,10 +3,7 @@ defmodule Nit.Commands.Log do
   alias Nit.Core.Refs
 
   def run() do
-    last_commit_sha =
-      Refs.get_head_branch_path()
-      |> File.read!()
-      |> String.trim()
+    last_commit_sha = Refs.get_current_head_sha()
 
     log_commit(last_commit_sha)
   end
