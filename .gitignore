@@ -24,6 +24,7 @@ nit-*.tar
 
 # Generated Binary
 /nit
+/nit_playground/nit
 
 # Nit folder
 .nit/
