@@ -1,4 +1,5 @@
 defmodule Nit.Commands.Log do
+  alias Nit.Core.ObjectStore
   alias Nit.Core.Refs
 
   def run() do
@@ -13,11 +14,7 @@ defmodule Nit.Commands.Log do
   defp log_commit(nil), do: :ok
 
   defp log_commit(sha) do
-    content =
-      sha
-      |> get_object_path()
-      |> File.read!()
-      |> :zlib.uncompress()
+    content = ObjectStore.get_object(sha)
 
     [_, body] = String.split(content, <<0>>, parts: 2)
 
@@ -35,10 +32,5 @@ defmodule Nit.Commands.Log do
       [_, hash] -> hash
       nil -> nil
     end
-  end
-
-  defp get_object_path(sha) do
-    {dir, file} = String.split_at(sha, 2)
-    Path.join([".nit", "objects", dir, file])
   end
 end
