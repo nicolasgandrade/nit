@@ -1,5 +1,5 @@
 defmodule Nit.Commands.UpdateRef do
-  alias Nit.Utils.Head
+  alias Nit.Core.Head
 
   def run(latest_commit_sha) do
     current_branch_path = Head.get_head_branch_path()

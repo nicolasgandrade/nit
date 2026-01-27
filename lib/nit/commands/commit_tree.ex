@@ -1,5 +1,5 @@
 defmodule Nit.Commands.CommitTree do
-  alias Nit.Utils.ObjectStore
+  alias Nit.Core.ObjectStore
 
   def run(tree_sha, message, parent_sha \\ nil) do
     # TODO: Make this receive actual data from the user.

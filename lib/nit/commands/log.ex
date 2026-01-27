@@ -1,5 +1,5 @@
 defmodule Nit.Commands.Log do
-  alias Nit.Utils.Head
+  alias Nit.Core.Head
 
   def run() do
     last_commit_sha =

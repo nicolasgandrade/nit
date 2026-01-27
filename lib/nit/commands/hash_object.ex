@@ -1,5 +1,5 @@
 defmodule Nit.Commands.HashObject do
-  alias Nit.Utils.ObjectStore
+  alias Nit.Core.ObjectStore
 
   def run(file_path) do
     content = File.read!(file_path)

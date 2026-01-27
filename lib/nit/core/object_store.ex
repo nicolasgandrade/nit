@@ -1,4 +1,4 @@
-defmodule Nit.Utils.ObjectStore do
+defmodule Nit.Core.ObjectStore do
   def save_object_on_disk(hash, data) do
     {dir_name, file_name} = String.split_at(hash, 2)
 

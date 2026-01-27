@@ -1,6 +1,6 @@
 defmodule Nit.Commands.WriteTree do
   alias Nit.Commands.HashObject
-  alias Nit.Utils.ObjectStore
+  alias Nit.Core.ObjectStore
 
   def run() do
     {root_sha_hex, _binary} = build_tree(".")
