@@ -22,7 +22,10 @@ defmodule Nit.Commands.Log do
     [_, body] = String.split(content, <<0>>, parts: 2)
 
     body
-    |> tap(&IO.puts("#{&1}\n------"))
+    |> tap(fn _ ->
+      IO.puts("commit #{sha}")
+      IO.puts("#{body}\n------")
+    end)
     |> extract_parent_from_text()
     |> log_commit()
   end
