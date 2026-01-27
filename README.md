@@ -1,21 +1,9 @@
 # Nit
 
-**TODO: Add description**
+Nit is a _very_ simplified re-implementation of Git in Elixir.
 
-## Installation
+The project serves as a deep dive into two distinct worlds:
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `nit` to your list of dependencies in `mix.exs`:
+Git Internals: Understanding the "plumbing" — how Git manages objects (blobs, trees, commits), calculates hashes, and navigates history.
 
-```elixir
-def deps do
-  [
-    {:nit, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/nit>.
-
+The Elixir Ecosystem: Applying functional programming patterns, recursion, and pattern matching to handle complex file-system operations and binary data.
