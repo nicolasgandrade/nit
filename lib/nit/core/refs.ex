@@ -1,4 +1,4 @@
-defmodule Nit.Core.Head do
+defmodule Nit.Core.Refs do
   def get_head_branch_path() do
     ".nit/HEAD"
     |> File.read!()

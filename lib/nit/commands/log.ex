@@ -1,9 +1,9 @@
 defmodule Nit.Commands.Log do
-  alias Nit.Core.Head
+  alias Nit.Core.Refs
 
   def run() do
     last_commit_sha =
-      Head.get_head_branch_path()
+      Refs.get_head_branch_path()
       |> File.read!()
       |> String.trim()
 
