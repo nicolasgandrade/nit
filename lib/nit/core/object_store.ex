@@ -15,6 +15,13 @@ defmodule Nit.Core.ObjectStore do
     {sha_hex, sha_binary}
   end
 
+  def get_object(sha) do
+    sha
+    |> get_object_path()
+    |> File.read!()
+    |> :zlib.uncompress()
+  end
+
   defp hash_object(object) do
     :crypto.hash(:sha, object)
   end
@@ -35,6 +42,11 @@ defmodule Nit.Core.ObjectStore do
 
     File.mkdir_p!(dir_path)
     File.write!(file_path, data)
+  end
+
+  defp get_object_path(sha) do
+    {dir, file} = String.split_at(sha, 2)
+    Path.join([".nit", "objects", dir, file])
   end
 
   def save_object_on_disk(hash, data) do
