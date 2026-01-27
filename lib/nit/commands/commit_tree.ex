@@ -1,6 +1,5 @@
 defmodule Nit.Commands.CommitTree do
   alias Nit.Utils.ObjectStore
-  alias Nit.Utils.Head
 
   def run(tree_sha, message, parent_sha \\ nil) do
     # TODO: Make this receive actual data from the user.
@@ -41,21 +40,7 @@ defmodule Nit.Commands.CommitTree do
     compressed = :zlib.compress(store)
 
     ObjectStore.save_object_on_disk(sha_hex, compressed)
-    update_head_branch_with_latest_commit(sha_hex)
 
     sha_hex
-  end
-
-  defp update_head_branch_with_latest_commit(latest_commit_sha) do
-    current_branch_path = Head.get_head_branch_path()
-
-    branch_dir =
-      current_branch_path
-      |> Path.dirname()
-
-    File.mkdir_p!(branch_dir)
-    File.write!(current_branch_path, "#{latest_commit_sha}\n")
-
-    {:ok}
   end
 end

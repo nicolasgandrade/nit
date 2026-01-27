@@ -19,6 +19,9 @@ defmodule Nit.CLI do
       ["commit-tree", tree_sha, "-p", parent_sha, message] ->
         Nit.Commands.CommitTree.run(tree_sha, message, parent_sha)
 
+      ["update-ref", commit_sha] ->
+        Nit.Commands.UpdateRef.run(commit_sha)
+
       ["log"] ->
         Nit.Commands.Log.run()
 
