@@ -1,3 +1,0 @@
-this is a file in the root folder
-
-After first commit

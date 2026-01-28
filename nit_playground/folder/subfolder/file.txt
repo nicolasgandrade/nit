@@ -1,3 +1,0 @@
-this is a file in a subfolder.
-
-After first commit
