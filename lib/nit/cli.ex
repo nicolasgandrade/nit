@@ -28,6 +28,9 @@ defmodule Nit.CLI do
       ["commit", "-m", message] ->
         Nit.Commands.Commit.run(message)
 
+      ["checkout", commit_sha] ->
+        Nit.Commands.Checkout.run(commit_sha)
+
       _ ->
         IO.puts("Nit: Unknown command.")
     end
