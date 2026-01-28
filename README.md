@@ -1,6 +1,6 @@
 # ⚗️ Nit (Educational Proof-of-concept)
 
-Nit is a _very_ simplified re-implementation of Git, buit entirely in Elixir.
+Nit is a _very_ simplified re-implementation of Git, built entirely in Elixir.
 
 The project serves as a deep dive into two distinct worlds:
 
